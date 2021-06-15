@@ -11,4 +11,8 @@ class Magicien extends Personnage {
         return mt_rand(-50, 250) + $this->force;
     }
 
+    public function crier(){
+        echo "Abracadabra \n";
+    }
+
 }// Fin de la classe Magicien

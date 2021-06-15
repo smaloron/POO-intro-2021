@@ -1,6 +1,6 @@
 <?php
 
-class Personnage {
+abstract class Personnage {
 
     const MAX_FORCE = 200;
     const MIN_FORCE = 1;
@@ -82,5 +82,7 @@ class Personnage {
     public function EstVivant(): bool{
         return $this->vie >0;
     }
+
+    public abstract function crier();
 
 } // Fin de la classe Personnage
