@@ -11,18 +11,26 @@ $div->setContent(new HtmlTag(
     )
 );
 
-echo $div;
+//echo $div;
 
 
 $input = new InputElement("number", "age", "19", []);
 
-echo $input;
+//echo $input;
+
+$data = [
+    "age" => "45",
+    "name" => "Brahé",
+    "prenom" => "Tycho",
+    "profession" => "Astronome"
+];
 
 $form = new Form("post", "action");
 
-$form   ->addInput("number", "age", 34)
+$form   ->addInput("number", "age", "34")
         ->addInput("text", "name", "Bob")
-        ->addInput("text", "prenom", "Paul");
+        ->addInput("text", "prenom", "Paul")
+        ->addInput("text", "profession", "Formateur");
 
-        var_dump($form);
-//echo $form;
+$form->setData($data);        
+echo $form;

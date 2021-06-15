@@ -62,9 +62,15 @@ class Form {
     private function getFieldsAsHtml(){
         $html = "";
 
-        foreach($this->fields as $element){
-            $html .= $element;
+        foreach($this->fields as $key =>$element){
+            $label = new HtmlTag("label", [], ucfirst($key) );
+            $div = new HtmlTag("div", [], $label . $element);
+            $html .= $div;
         }
+
+        // Ajout du bouton valider
+        $button = new HtmlTag("button", ["type"=>"submit"], "Valider");
+        $html .= $button;
 
         return $html;
     }
@@ -74,7 +80,7 @@ class Form {
      * Pour cela on utilise une instance de HtmlTag 
      * pour créer la balise formulaire
      *
-     * @return string
+     * 
      */
     public function __toString()
     {
@@ -87,7 +93,25 @@ class Form {
         // Création de la balise form
         $form = new HtmlTag("form", $attributes, $this->getFieldsAsHtml());
 
-        return $form;
+        return $form->getHtml();
+    }
+
+    /**
+     * Auto-remplissage du formulaire avec des donnnées $data
+     * provenant de l'extérieur
+     *
+     * @param array $data
+     * @return void
+     */
+    public function setData(array $data){
+        // Boucle sur l'ensemble des données $data
+        foreach($data as $key => $val){
+            // Test si $key correspond à un nom de champs dans $this->fields
+            if( array_key_exists($key, $this->fields)){
+                // exécuter la méthode setValue sur l'élément de $fields
+                $this->fields[$key]->setValue($val);
+            }
+        }
     }
 
 }
